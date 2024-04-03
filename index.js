@@ -13,12 +13,10 @@ app.use("/api/users", userRoutes);
 
 // Connect to MongoDB
 mongoose
-  .connect(
-    "mongodb+srv://hadidaoud885:usnW4jC0w8vLFXdi@cluster0.fnkqn6y.mongodb.net/"
-  )
+  .connect(process.env.MONGODB_URI)
   .then(() => {
-    app.listen(4000, () => {
-      console.log("connected to db & listining on port", 4000, "!");
+    app.listen(process.env.PORT, () => {
+      console.log("connected to db & listining on port", process.env.PORT, "!");
     });
   })
   .catch((error) => {
