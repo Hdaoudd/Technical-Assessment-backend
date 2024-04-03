@@ -27,18 +27,6 @@ exports.signup = async (req, res) => {
     user.password = await bcrypt.hash(password, salt);
 
     await user.save();
-
-    const payload = {
-      user: {
-        id: user.id,
-        username: user.username, // Add username to payload
-      },
-    };
-
-    jwt.sign(payload, "jwtSecret", { expiresIn: 3600 }, (err, token) => {
-      if (err) throw err;
-      res.json({ token, username: user.username }); // Return username along with token
-    });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -69,13 +57,13 @@ exports.signin = async (req, res) => {
     const payload = {
       user: {
         id: user.id,
-        username: user.username, // Add username to payload
+        username: user.username,
       },
     };
 
     jwt.sign(payload, "jwtSecret", { expiresIn: 3600 }, (err, token) => {
       if (err) throw err;
-      res.json({ token, username: user.username }); // Return username along with token
+      res.json({ token, username: user.username });
     });
   } catch (err) {
     console.error(err.message);
