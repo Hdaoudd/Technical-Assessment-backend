@@ -12,8 +12,8 @@ exports.loginUser = async (req, res) => {
     const user = await User.login(username, password);
     const token = createToken(user._id);
 
-    res.status(200).json({ username: user.username, token }); // Only send username and token
+    res.status(200).json({ username, password, token });
   } catch (error) {
-    res.status(400).json({ error: error.message }); // Send error message
+    res.status(400).json({ error: error.message });
   }
 };
