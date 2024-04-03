@@ -1,27 +1,24 @@
-require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
-const LoginUser = require("../routes/loginuser");
-const SignupUser = require("../routes/signupuser");
+const bodyParser = require("body-parser");
+const userRoutes = require("./routes/loginuser");
 
 const app = express();
-const cors = require("cors");
 
-app.use(cors());
-app.use(express.json());
-// app.use((req, res, next) => {
-//   console.log(req.path, req.method);
-//   next();
-// });
+// Middleware
+app.use(bodyParser.json());
 
-app.use("/api/user", LoginUser);
-app.use("/api/user", SignupUser);
+// Routes
+app.use("/api/users", userRoutes);
 
+// Connect to MongoDB
 mongoose
-  .connect(process.env.MONGODB_URI)
+  .connect(
+    "mongodb+srv://hadidaoud885:usnW4jC0w8vLFXdi@cluster0.fnkqn6y.mongodb.net/"
+  )
   .then(() => {
-    app.listen(process.env.PORT, () => {
-      console.log("connected to db & listining on port", process.env.PORT, "!");
+    app.listen(4000, () => {
+      console.log("connected to db & listining on port", 4000, "!");
     });
   })
   .catch((error) => {
