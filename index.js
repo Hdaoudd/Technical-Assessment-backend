@@ -14,7 +14,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/api", LoginUser);
+app.use("/api/user", LoginUser);
 //app.use("/api/user", SignupUser);
 
 mongoose
