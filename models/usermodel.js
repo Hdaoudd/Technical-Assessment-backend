@@ -29,22 +29,22 @@ userSchema.statics.login = async function (username, password) {
 
   return user;
 };
-userSchema.statics.signup = async function (username, password) {
-  if (!username || !password) {
-    throw Error("All fields must be fields");
-  }
+// userSchema.statics.signup = async function (username, password) {
+//   if (!username || !password) {
+//     throw Error("All fields must be fields");
+//   }
 
-  const exists = await this.findOne({ username });
+//   const exists = await this.findOne({ username });
 
-  if (exists) {
-    throw Error("Username already in use");
-  }
-  const salt = await bcrypt.genSalt(10);
-  const hash = await bcrypt.hash(password, salt);
+//   if (exists) {
+//     throw Error("Username already in use");
+//   }
+//   const salt = await bcrypt.genSalt(10);
+//   const hash = await bcrypt.hash(password, salt);
 
-  const user = await this.create({ username, password: hash });
+//   const user = await this.create({ username, password: hash });
 
-  return user;
-};
+//   return user;
+// };
 
 module.exports = mongoose.model("User", userSchema);
