@@ -12,6 +12,7 @@ const config = {
   credential: true,
   methods: ["GET", "POST", "PUT", "DELETE"],
 };
+app.options("", cors(config));
 app.use(cors(config));
 app.use(express.json());
 app.use((req, res, next) => {
