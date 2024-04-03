@@ -7,21 +7,15 @@ const SignupUser = require("./routes/signupuser");
 const app = express();
 const cors = require("cors");
 
-const config = {
-  origin: "*",
-  credential: true,
-  methods: ["GET", "POST", "PUT", "DELETE"],
-};
-app.options("", cors(config));
-app.use(cors(config));
+app.use(cors());
 app.use(express.json());
 app.use((req, res, next) => {
   console.log(req.path, req.method);
   next();
 });
 
-app.use("/api/user", LoginUser);
-app.use("/api/user", SignupUser);
+// app.use("/api/user", LoginUser);
+// app.use("/api/user", SignupUser);
 
 mongoose
   .connect(process.env.MONGODB_URI)
