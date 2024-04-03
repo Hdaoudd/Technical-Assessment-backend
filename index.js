@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 // const LoginUser = require("./routes/loginuser");
-// const SignupUser = require("./routes/signupuser");
+const SignupUser = require("./routes/signupuser");
 
 const app = express();
 const cors = require("cors");
@@ -15,20 +15,15 @@ app.use((req, res, next) => {
 });
 
 // app.use("/api/user", LoginUser);
-// app.use("/api/user", SignupUser);
+app.use("/api/user", SignupUser);
 
 mongoose
-  .connect(
-    "mongodb+srv://hadidaoud885:usnW4jC0w8vLFXdi@cluster0.fnkqn6y.mongodb.net/"
-  )
+  .connect(process.env.MONGODB_URI)
   .then(() => {
-    app.listen(4000, () => {
-      console.log("connected to db & listining on port!");
+    app.listen(process.env.PORT, () => {
+      console.log("connected to db & listining on port", process.env.PORT, "!");
     });
   })
   .catch((error) => {
     console.log(error);
   });
-app.listen(4000, () => {
-  console.log("connected to db & listining on port!");
-});
