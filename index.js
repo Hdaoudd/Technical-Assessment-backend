@@ -18,10 +18,12 @@ app.use((req, res, next) => {
 // app.use("/api/user", SignupUser);
 
 mongoose
-  .connect(process.env.MONGODB_URI)
+  .connect(
+    "mongodb+srv://hadidaoud885:usnW4jC0w8vLFXdi@cluster0.fnkqn6y.mongodb.net/"
+  )
   .then(() => {
-    app.listen(process.env.PORT, () => {
-      console.log("connected to db & listining on port", process.env.PORT, "!");
+    app.listen(4000, () => {
+      console.log("connected to db & listining on port", 4000, "!");
     });
   })
   .catch((error) => {
