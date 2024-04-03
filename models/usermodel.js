@@ -14,20 +14,25 @@ const userSchema = new Schema({
 });
 
 userSchema.statics.login = async function (username, password) {
-  if (!username || !password) {
-    throw Error("All fields must be fields");
-  }
-  const user = await this.findOne({ username });
-  if (!user) {
-    throw Error("Incorrect Username");
-  }
+  try {
+    if (!username || !password) {
+      throw Error("All fields must be fields");
+    }
+    const user = await this.findOne({ username });
+    if (!user) {
+      throw Error("Incorrect Username");
+    }
 
-  const match = await bcrypt.compare(password, user.password);
-  if (!match) {
-    throw Error("Incorrect Password");
-  }
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) {
+      throw Error("Incorrect Password");
+    }
 
-  return user;
+    return user;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
 };
 // userSchema.statics.signup = async function (username, password) {
 //   if (!username || !password) {
