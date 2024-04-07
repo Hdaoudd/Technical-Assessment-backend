@@ -3,7 +3,6 @@ const router = express.Router();
 const { check } = require("express-validator");
 const userController = require("../controllers/userController");
 
-// Sign up route
 router.post(
   "/signup",
   [
@@ -16,7 +15,6 @@ router.post(
   userController.signup
 );
 
-// Sign in route
 router.post(
   "/signin",
   [
